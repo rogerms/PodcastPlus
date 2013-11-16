@@ -181,7 +181,7 @@ namespace PodcastPlus
         public string Keywords { get; set; }
         public string Category { get; set; }
         public string Explicit { get; set; }
-        public List<PodcastEpisode> Items = null;
+        public List<PodcastEpisode> Items {get; set;}
     }
 
     public class PodcastEpisode

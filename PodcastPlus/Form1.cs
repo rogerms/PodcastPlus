@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using Newtonsoft.Json;
 
 namespace PodcastPlus
 {
@@ -19,7 +20,23 @@ namespace PodcastPlus
             PodcastClient pc = new PodcastClient();
             List<PodcastFeed> feed = pc.RetrieveFeedAsync(@"C:\Users\Powerspeak\SkyDrive\Programming\Podcast.xml");
 
-            Debug.WriteLine("Title :" + feed.Count);
+            List<PodcastFeed> feedCopy = new List<PodcastFeed>();
+            Random r = new Random();
+            for (int i = 0; i < 5; i++)
+            {
+                int num = r.Next(0, 800);
+                feedCopy.Add(feed[num]);
+            }
+            string output = JsonConvert.SerializeObject(feedCopy);
+
+            List<PodcastFeed> deserializedProduct = JsonConvert.DeserializeObject<List<PodcastFeed>>(output);
+
+            Debug.WriteLine("Output :" + output);
+
+            for (int i = 0; i < 5; i++)
+            {
+                Debug.WriteLine("deserialized :" + deserializedProduct[i].Title);
+            }
         }
     }
 }
