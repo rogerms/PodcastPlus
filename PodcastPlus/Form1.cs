@@ -22,9 +22,10 @@ namespace PodcastPlus
 
             List<PodcastFeed> feedCopy = new List<PodcastFeed>();
             Random r = new Random();
+            int total = feed.Count;
             for (int i = 0; i < 5; i++)
             {
-                int num = r.Next(0, 800);
+                int num = r.Next(0, total);
                 feedCopy.Add(feed[num]);
             }
             string output = JsonConvert.SerializeObject(feedCopy);
