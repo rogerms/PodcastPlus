@@ -16,10 +16,10 @@ namespace PodcastPlus
 
         }
 
-        public List<PodcastFeed> RetrieveFeedAsync(Uri feedUriString)
+        public PodcastFeedList RetrieveFeedAsync(Uri feedUriString)
         {
             PodcastFeed pfeed = new PodcastFeed();
-            List<PodcastFeed> feedList = new List<PodcastFeed>();
+            PodcastFeedList feedList = new PodcastFeedList();
             try
             {
                 XmlDocument doc = new XmlDocument();
@@ -92,7 +92,7 @@ namespace PodcastPlus
             return xmlString;
         }
 
-        public List<PodcastFeed> RetrieveFeedAsync(string feedUriString)
+        public PodcastFeedList RetrieveFeedAsync(string feedUriString)
         {
             Uri feedUri = new Uri(feedUriString);
 
@@ -198,5 +198,39 @@ namespace PodcastPlus
         public string Type { get; set; }
     }
 
+    public class PodcastFeedList : List<PodcastFeed>
+    {
+      //  public PodcastFeed this[int index] { get; set; }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        public bool RemoveFeed(string title)
+        {
+            PodcastFeed item = this.Find(p => p.Title.Equals(title));
+            if (item == null) return false;
+
+            return this.Remove(item);
+        }
+
+        public bool RemoveEpisode(PodcastFeed feed, string title)
+        {
+            PodcastEpisode item = feed.Items.Find(p => p.Title.Equals(title));
+            if (item == null) return false;
+
+            return feed.Items.Remove(item);
+        }
+
+        public bool RemoveEpisode(string feedTitle, string episodeTitle)
+        {
+            PodcastFeed feed = this.Find(p => p.Title.Equals(feedTitle));
+            if (feed == null) return false;
+            PodcastEpisode item = feed.Items.Find(p => p.Title.Equals(episodeTitle));
+            if (item == null) return false;
+            return feed.Items.Remove(item);
+        }
+    }
 }
 
