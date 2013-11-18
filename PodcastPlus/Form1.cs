@@ -29,7 +29,9 @@ namespace PodcastPlus
                 //int num = r.Next(0, total);
                 feedCopy.Add(feed[i]);
             }
-            bool res = feedCopy.RemoveFeed("");
+            bool res = feedCopy.RemoveFeed("The Listening Room");
+            res &= feedCopy.RemoveFeed("");
+            res &= feedCopy.RemoveFeed("KCRW's Le Show (Harry Shearer)");
 
             Debug.WriteLine("Remove Results!!" + res);
 
