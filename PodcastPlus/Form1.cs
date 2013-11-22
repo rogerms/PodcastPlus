@@ -31,12 +31,6 @@ namespace PodcastPlus
                 feedCopy.Add(feed[i]);
             }
 
-            bool res = feedCopy.RemoveFeed("The Listening Room");
-            res &= feedCopy.RemoveFeed("");
-            res &= feedCopy.RemoveFeed("KCRW's Le Show (Harry Shearer)");
-
-            Debug.WriteLine("Remove Results!!" + res);
-
             bool res = feedCopy.RemoveEpisode("Bill O'Reilly", "Some straight talk about the ObamaCare mess");
             res &= feedCopy.RemoveEpisode("Bill O'Reilly", "The people vs. the establishment");
             Debug.WriteLine("Remove Results!!" + res + " " + feedCopy.FindFeed("Bill O'Reilly").Items.Count);
